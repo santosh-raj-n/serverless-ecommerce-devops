@@ -1,14 +1,14 @@
-// --- api/products.js: FINAL EXPANDED CODE (10 Products) ---
+// --- api/products.js: FINAL CODE (ALL PNG EXTENSIONS) ---
 
 module.exports = (req, res) => {
-    // EXPANDED product list with 10 products and corrected file extensions
+    // Corrected product list with ALL image extensions set to .png
     const allProducts = [
         {
             id: 1,
             name: 'DevOps T-Shirt',
             price: 25.00,
             tags: ['clothing', 'devops', 'merch'],
-            imageUrl: '/images/devops-tee.jpg', // CHECKED: .jpg
+            imageUrl: '/images/devops-tee.png', // <-- FIXED to .png
             description: 'Comfortable cotton T-shirt for the dedicated DevOps engineer. Show your passion for automation.'
         },
         {
@@ -16,7 +16,7 @@ module.exports = (req, res) => {
             name: 'Terraform Mug',
             price: 15.00,
             tags: ['accessory', 'iac', 'tool'],
-            imageUrl: '/images/terraform-mug.jpg', // CHECKED: .jpg
+            imageUrl: '/images/terraform-mug.png', // <-- FIXED to .png
             description: 'Start your day with some Infrastructure as Code motivation. Perfect for coffee or tea.'
         },
         {
@@ -24,7 +24,7 @@ module.exports = (req, res) => {
             name: 'Serverless Sticker Pack',
             price: 10.00,
             tags: ['accessory', 'devops', 'sticker'],
-            imageUrl: '/images/serverless-stickers.png', // CHECKED: .png
+            imageUrl: '/images/serverless-stickers.png', // Already .png
             description: 'Pack of 10 high-quality vinyl stickers for your laptop, water bottle, or server rack.'
         },
         {
@@ -32,7 +32,7 @@ module.exports = (req, res) => {
             name: 'Cloud Computing Hoodie',
             price: 45.00,
             tags: ['clothing', 'cloud', 'warm'],
-            imageUrl: '/images/cloud-hoodie.jpg', // CHECKED: .jpg
+            imageUrl: '/images/cloud-hoodie.png', // <-- FIXED to .png
             description: 'Stay warm while deploying to the cloud. Unisex design.'
         },
         {
@@ -40,50 +40,22 @@ module.exports = (req, res) => {
             name: 'Kubernetes Guidebook',
             price: 35.00,
             tags: ['book', 'kubernetes', 'devops', 'tool'],
-            imageUrl: '/images/kubernetes-book.png', // CHECKED: .png
+            imageUrl: '/images/kubernetes-book.png', // Already .png
             description: 'The definitive guide to container orchestration. From beginner to advanced.'
         },
         {
             id: 6,
             name: 'Docker Whale Plushie',
-            price: 20.00, 
+            price: 20.00,
             tags: ['collectible', 'docker', 'fun', 'devops'],
-            imageUrl: '/images/docker-plushie.jpg', // CHECKED: .jpg
+            imageUrl: '/images/docker-plushie.png', // <-- FIXED to .png
             description: 'Cuddly Docker whale plushie. Perfect mascot for your continuous delivery pipeline.'
         },
-        // --- FOUR NEW PRODUCTS ADDED BELOW ---
-        {
-            id: 7,
-            name: 'CI/CD Pipeline Poster',
-            price: 18.00,
-            tags: ['accessory', 'devops', 'learning'],
-            imageUrl: '/images/ci-cd-poster.jpg', // ASSUMED: .jpg (You'll need to download this image)
-            description: 'Large wall poster detailing a continuous integration and deployment workflow.'
-        },
-        {
-            id: 8,
-            name: 'AWS Lambda Pin',
-            price: 8.00,
-            tags: ['accessory', 'cloud', 'serverless'],
-            imageUrl: '/images/lambda-pin.png', // ASSUMED: .png (You'll need to download this image)
-            description: 'Small enamel pin featuring the AWS Lambda logo.'
-        },
-        {
-            id: 9,
-            name: 'GitOps Workflow Book',
-            price: 40.00,
-            tags: ['book', 'gitops', 'tool'],
-            imageUrl: '/images/gitops-book.jpg', // ASSUMED: .jpg (You'll need to download this image)
-            description: 'An advanced technical book covering infrastructure automation using Git.'
-        },
-        {
-            id: 10,
-            name: 'Monitoring Dashboard Screen',
-            price: 100.00,
-            tags: ['collectible', 'monitoring', 'fun'],
-            imageUrl: '/images/monitor-screen.jpg', // ASSUMED: .jpg (You'll need to download this image)
-            description: 'A mock-up of a monitoring dashboard on a mini-screen collectible.'
-        }
+        // --- If you added 4 new products, ensure they are also .png here ---
+        // { id: 7, name: 'CI/CD Pipeline Poster', price: 18.00, tags: ['accessory', 'devops', 'learning'], imageUrl: '/images/ci-cd-poster.png', description: '...' },
+        // { id: 8, name: 'AWS Lambda Pin', price: 8.00, tags: ['accessory', 'cloud', 'serverless'], imageUrl: '/images/lambda-pin.png', description: '...' },
+        // { id: 9, name: 'GitOps Workflow Book', price: 40.00, tags: ['book', 'gitops', 'tool'], imageUrl: '/images/gitops-book.png', description: '...' },
+        // { id: 10, name: 'Monitoring Dashboard Screen', price: 100.00, tags: ['collectible', 'monitoring', 'fun'], imageUrl: '/images/monitor-screen.png', description: '...' }
     ];
 
     // ... (Filtering/Searching logic remains the same) ...
