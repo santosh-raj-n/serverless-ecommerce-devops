@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Serverless Swag Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #e0f2f7; /* Light blue background */
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            font-weight: 700;
+        }
+        .filter-buttons {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .filter-buttons button {
+            padding: 12px 25px;
+            margin: 8px;
+            border: none;
+            border-radius: 8px;
+            background-color: #3498db; /* Blue */
+            color: white;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .filter-buttons button:hover {
+            background-color: #2980b9; /* Darker Blue */
+            transform: translateY(-2px);
+        }
+        .product-list {
+            display: grid; /* Use grid for better layout control */
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Responsive grid */
+            gap: 25px;
+            margin-top: 20px;
+        }
+        .product-card {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            padding: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+        .product-card img {
+            max-width: 100%;
+            height: 150px; /* Fixed height for images */
+            object-fit: contain; /* Ensures entire image is visible */
+            border-radius: 5px;
+            margin-bottom: 15px;
+            background-color: #f9f9f9;
+            padding: 5px;
+        }
+        .product-card h2 {
+            font-size: 1.5em;
+            margin: 10px 0;
+            color: #e74c3c; /* Red */
+        }
+        .product-card p {
+            font-size: 1.1em;
+            margin: 8px 0;
+            font-weight: bold;
+            color: #34495e;
+        }
+        .tag-container {
+            margin-top: 10px;
+            min-height: 25px; /* Prevent layout shift if no tags */
+        }
+        .tag {
+            display: inline-block;
+            background-color: #2ecc71; /* Green */
+            color: white;
+            padding: 4px 10px;
+            border-radius: 5px;
+            font-size: 0.85em;
+            margin: 3px;
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>DevOps Serverless Swag Store</h1>
+
+        <div class="filter-buttons">
+            <button onclick="loadProducts()">Show All Products</button>
+            <button onclick="loadProducts('clothing')">Filter by: Clothing</button>
+            <button onclick="loadProducts('accessory')">Filter by: Accessories</button>
+            <button onclick="loadProducts('devops')">Filter by: DevOps</button>
+            <button onclick="loadProducts('iac')">Filter by: IaC</button>
+        </div>
+
+        <div id="product-container" class="product-list">
+            </div>
+    </div>
+
+    <script>
+        async function loadProducts(tag = '') {
+            const container = document.getElementById('product-container');
+            container.innerHTML = '<h2>Loading products...</h2>'; 
+
+            let apiUrl = '/api/products'; 
+            if (tag) {
+                apiUrl += `?tag=${tag}`;
+            }
+
+            try {
+                const response = await fetch(apiUrl);
+                const result = await response.json();
+                
+                if (response.ok) {
+                    displayProducts(result.data);
+                } else {
+                    container.innerHTML = `<h2>Error fetching products: ${result.message || 'Unknown error'}</h2>`;
+                }
+
+            } catch (error) {
+                console.error('Fetch error:', error);
+                container.innerHTML = '<h2>Network Error: Could not reach the serverless API.</h2>';
+            }
+        }
+
+        function displayProducts(products) {
+            const container = document.getElementById('product-container');
+            container.innerHTML = ''; // Clear existing content
+
+            if (products.length === 0) {
+                container.innerHTML = '<h2>No products found for this filter.</h2>';
+                return;
+            }
+
+            products.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                
+                const priceFormatted = `$${product.price.toFixed(2)}`;
+                const tagsHtml = product.tags ? product.tags.map(tag => `<span class="tag">${tag}</span>`).join(' ') : '';
+                
+                card.innerHTML = `
+                    <img src="${product.imageUrl}" alt="${product.name}">
+                    <h2>${product.name}</h2>
+                    <p>Price: ${priceFormatted}</p>
+                    <div class="tag-container">${tagsHtml}</div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Load all products when the page first loads
+        window.onload = () => loadProducts();
+    </script>
+</body>
+</html>
