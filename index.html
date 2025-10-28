@@ -4,122 +4,200 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DevOps Serverless Swag Store</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        /* CSS from previous step, but slightly refined */
+        :root {
+            --primary-blue: #3498db;
+            --dark-blue: #2980b9;
+            --green: #2ecc71;
+            --red: #e74c3c;
+            --text-dark: #2c3e50;
+            --text-medium: #34495e;
+            --bg-light: #ecf0f1;
+            --bg-dark: #bdc3c7;
+            --card-bg: #ffffff;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-medium: rgba(0, 0, 0, 0.12);
+        }
+
         body {
-            font-family: 'Roboto', Arial, sans-serif;
+            font-family: 'Open Sans', Arial, sans-serif;
             margin: 0;
             padding: 20px;
-            background-color: #e0f2f7; 
-            color: #333;
+            background-color: var(--bg-light);
+            color: var(--text-medium);
             line-height: 1.6;
         }
+
         .container {
-            max-width: 1200px;
-            margin: 20px auto;
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            max-width: 1280px;
+            margin: 30px auto;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px var(--shadow-medium);
         }
+
         h1 {
+            font-family: 'Montserrat', sans-serif;
             text-align: center;
-            color: #2c3e50;
-            margin-bottom: 30px;
-            font-size: 2.5em;
+            color: var(--text-dark);
+            margin-bottom: 40px;
+            font-size: 3em;
             font-weight: 700;
         }
+
         .controls {
             text-align: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #ddd;
+            margin-bottom: 40px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid var(--bg-dark);
         }
+
+        .search-box {
+            margin-bottom: 25px;
+        }
+
+        .search-box input[type="text"] {
+            padding: 14px;
+            width: 500px;
+            max-width: 95%;
+            border: 2px solid var(--bg-dark);
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-family: 'Open Sans', sans-serif;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .search-box input[type="text"]:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 8px rgba(52, 152, 219, 0.4);
+            outline: none;
+        }
+
         .filter-buttons button {
-            padding: 12px 20px;
-            margin: 5px;
+            padding: 12px 25px;
+            margin: 6px;
             border: none;
             border-radius: 8px;
-            background-color: #3498db; 
+            background-color: var(--primary-blue);
             color: white;
             cursor: pointer;
             font-size: 1em;
-            font-weight: bold;
+            font-weight: 600;
             transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+
         .filter-buttons button:hover {
-            background-color: #2980b9; 
-            transform: translateY(-2px);
+            background-color: var(--dark-blue);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
-        .search-box {
-            margin-bottom: 20px;
-        }
-        .search-box input[type="text"] {
-            padding: 12px;
-            width: 400px;
-            max-width: 90%;
-            border: 2px solid #ccc;
-            border-radius: 8px;
-            font-size: 1em;
-            transition: border-color 0.3s;
-        }
-        .search-box input[type="text"]:focus {
-            border-color: #3498db;
-            outline: none;
-        }
+
         .product-list {
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
-            gap: 25px;
-            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
         }
+
         .product-card {
-            background: #ffffff;
+            background: var(--card-bg);
             border: 1px solid #e0e0e0;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border-radius: 12px;
+            box-shadow: 0 8px 25px var(--shadow-light);
             text-align: center;
-            padding: 20px;
+            padding: 25px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex; /* Use flex for internal layout */
+            flex-direction: column;
+            justify-content: space-between;
         }
+
         .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            transform: translateY(-7px);
+            box-shadow: 0 12px 30px var(--shadow-medium);
         }
+
         .product-card img {
             max-width: 100%;
-            height: 150px; 
-            object-fit: contain; 
-            border-radius: 5px;
-            margin-bottom: 15px;
-            background-color: #f9f9f9;
+            height: 180px; /* Slightly larger image height */
+            object-fit: cover; /* Cover for better visual fill */
+            border-radius: 8px;
+            margin-bottom: 20px;
+            background-color: #f0f0f0;
             padding: 5px;
         }
+
         .product-card h2 {
-            font-size: 1.3em; /* Slightly smaller for better fit */
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.6em;
             margin: 10px 0;
-            color: #e74c3c; 
+            color: var(--red);
+            font-weight: 700;
         }
-        .product-card p {
-            font-size: 1.1em;
-            margin: 5px 0 15px 0;
+
+        .product-card p.price {
+            font-size: 1.3em;
+            margin: 8px 0 15px 0;
             font-weight: bold;
-            color: #34495e;
+            color: var(--text-dark);
         }
+        
+        .product-card p.description {
+            font-size: 0.9em;
+            color: var(--text-medium);
+            margin: 5px 0 15px 0;
+            flex-grow: 1; /* Allows description to take available space */
+        }
+
         .tag-container {
-            margin-top: 10px;
-            min-height: 25px; 
+            margin-top: 15px;
+            min-height: 25px;
         }
+
         .tag {
             display: inline-block;
-            background-color: #2ecc71; 
+            background-color: var(--green);
             color: white;
-            padding: 4px 10px;
-            border-radius: 5px;
-            font-size: 0.85em;
-            margin: 3px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            margin: 4px;
             font-weight: normal;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            .filter-buttons button {
+                padding: 10px 15px;
+                font-size: 0.9em;
+            }
+            .product-card {
+                padding: 15px;
+            }
+            .product-card h2 {
+                font-size: 1.3em;
+            }
+            .product-card p.price {
+                font-size: 1.1em;
+            }
+        }
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+            .search-box input[type="text"] {
+                width: 95%;
+            }
+            .filter-buttons button {
+                width: calc(50% - 12px); /* Two buttons per row */
+            }
         }
     </style>
 </head>
@@ -132,7 +210,7 @@
                 <input 
                     type="text" 
                     id="search-input" 
-                    placeholder="Search for T-Shirt, Mug, Book..."
+                    placeholder="Search by name or description (e.g., T-Shirt, Kubernetes, tool...)"
                     onkeyup="handleSearch(event)"
                 >
             </div>
@@ -144,6 +222,7 @@
                 <button onclick="loadProducts('devops')">DevOps Gear</button>
                 <button onclick="loadProducts('book')">Books</button>
                 <button onclick="loadProducts('tool')">Tools</button>
+                <button onclick="loadProducts('collectible')">Collectibles</button>
             </div>
         </div>
 
@@ -152,32 +231,34 @@
     </div>
 
     <script>
-        // Global function to handle searching via ENTER key
         function handleSearch(event) {
+            // Only trigger search on Enter key press
             if (event.key === 'Enter') {
                 const searchTerm = document.getElementById('search-input').value;
-                loadProducts(null, searchTerm); // Load products with search term
+                loadProducts(null, searchTerm); 
             }
         }
 
-        // Updated function to handle both tag and search term
         async function loadProducts(tag = null, search = null) {
             const container = document.getElementById('product-container');
-            container.innerHTML = '<h2>Loading products...</h2>'; 
+            container.innerHTML = '<h2 style="text-align: center;">Loading products...</h2>'; 
 
             let apiUrl = '/api/products';
             const params = new URLSearchParams();
 
             if (tag) {
                 params.append('tag', tag);
-                // Clear search input when filtering by tag
-                document.getElementById('search-input').value = '';
+                document.getElementById('search-input').value = ''; // Clear search input when filtering
             }
-            if (search) {
+            // Use current search input value if no specific search term is passed
+            // This allows filtering while keeping existing search term
+            const currentSearchInput = document.getElementById('search-input').value;
+            if (search === null && currentSearchInput) { // If search is not explicitly cleared, use current input
+                params.append('search', currentSearchInput);
+            } else if (search) { // If a new search term is explicitly passed
                 params.append('search', search);
             }
             
-            // Append parameters to the URL if they exist
             if (params.toString()) {
                 apiUrl += '?' + params.toString();
             }
@@ -189,12 +270,12 @@
                 if (response.ok) {
                     displayProducts(result.data);
                 } else {
-                    container.innerHTML = `<h2>Error fetching products: ${result.message || 'Unknown error'}</h2>`;
+                    container.innerHTML = `<h2 style="text-align: center; color: var(--red);">Error fetching products: ${result.message || 'Unknown error'}</h2>`;
                 }
 
             } catch (error) {
                 console.error('Fetch error:', error);
-                container.innerHTML = '<h2>Network Error: Could not reach the serverless API.</h2>';
+                container.innerHTML = '<h2 style="text-align: center; color: var(--red);">Network Error: Could not reach the serverless API.</h2>';
             }
         }
 
@@ -203,7 +284,7 @@
             container.innerHTML = ''; 
 
             if (products.length === 0) {
-                container.innerHTML = '<h2>No products found matching your criteria.</h2>';
+                container.innerHTML = '<h2 style="text-align: center;">No products found matching your criteria.</h2>';
                 return;
             }
 
@@ -217,7 +298,8 @@
                 card.innerHTML = `
                     <img src="${product.imageUrl}" alt="${product.name}">
                     <h2>${product.name}</h2>
-                    <p>Price: ${priceFormatted}</p>
+                    <p class="price">Price: ${priceFormatted}</p>
+                    <p class="description">${product.description}</p>
                     <div class="tag-container">${tagsHtml}</div>
                 `;
                 container.appendChild(card);

@@ -1,66 +1,79 @@
-// --- api/products.js: Final Enhanced Backend Code ---
+// --- api/products.js: Final Enhanced Backend Code with Real Images ---
 
 module.exports = (req, res) => {
-    // Expanded list of products with more data and unique tags
     const allProducts = [
-        { 
-            id: 1, 
-            name: 'DevOps T-Shirt', 
-            price: 25.00, 
+        {
+            id: 1,
+            name: 'DevOps T-Shirt',
+            price: 25.00,
             tags: ['clothing', 'devops', 'merch'],
-            imageUrl: 'https://via.placeholder.com/150/FF5733/FFFFFF?text=DevOps+Tee', 
-            description: 'Comfortable cotton T-shirt for the dedicated DevOps engineer.'
+            imageUrl: 'https://images.unsplash.com/photo-1622435552308-412bf5b15b49?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+            description: 'Comfortable cotton T-shirt for the dedicated DevOps engineer. Show your passion for automation.'
         },
-        { 
-            id: 2, 
-            name: 'Terraform Mug', 
-            price: 15.00, 
+        {
+            id: 2,
+            name: 'Terraform Mug',
+            price: 15.00,
             tags: ['accessory', 'iac', 'tool'],
-            imageUrl: 'https://via.placeholder.com/150/33FF57/FFFFFF?text=Terraform+Mug', 
-            description: 'Start your day with some Infrastructure as Code motivation.'
+            imageUrl: 'https://images.unsplash.com/photo-1579298245158-37dfde15571f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+            description: 'Start your day with some Infrastructure as Code motivation. Perfect for coffee or tea.'
         },
-        { 
-            id: 3, 
-            name: 'Serverless Sticker Pack', 
-            price: 10.00, 
+        {
+            id: 3,
+            name: 'Serverless Sticker Pack',
+            price: 10.00,
             tags: ['accessory', 'devops', 'sticker'],
-            imageUrl: 'https://via.placeholder.com/150/3357FF/FFFFFF?text=Serverless+Sticker', 
-            description: 'Pack of 10 vinyl stickers for your laptop or water bottle.'
+            imageUrl: 'https://images.unsplash.com/photo-1611224885913-911e860ca8c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+            description: 'Pack of 10 high-quality vinyl stickers for your laptop, water bottle, or server rack.'
         },
-        { 
-            id: 4, 
-            name: 'Cloud Computing Hoodie', 
-            price: 45.00, 
+        {
+            id: 4,
+            name: 'Cloud Computing Hoodie',
+            price: 45.00,
             tags: ['clothing', 'cloud', 'warm'],
-            imageUrl: 'https://via.placeholder.com/150/FF33CC/FFFFFF?text=Cloud+Hoodie', 
-            description: 'Stay warm while deploying to the cloud.'
+            imageUrl: 'https://images.unsplash.com/photo-1620799140408-edc6dcd7dce1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+            description: 'Stay warm while deploying to the cloud. Unisex design.'
         },
-        { 
-            id: 5, 
-            name: 'Kubernetes Guidebook', 
-            price: 35.00, 
+        {
+            id: 5,
+            name: 'Kubernetes Guidebook',
+            price: 35.00,
             tags: ['book', 'kubernetes', 'devops', 'tool'],
-            imageUrl: 'https://via.placeholder.com/150/A3E4D7/000000?text=K8s+Book', 
-            description: 'The definitive guide to container orchestration.'
+            imageUrl: 'https://images.unsplash.com/photo-1549672049-74d7df63013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+            description: 'The definitive guide to container orchestration. From beginner to advanced.'
         },
-        { 
-            id: 6, 
-            name: 'Monitor Lizard Figure', 
-            price: 50.00, 
+        {
+            id: 6,
+            name: 'Monitor Lizard Figure',
+            price: 50.00,
             tags: ['collectible', 'monitoring', 'fun'],
-            imageUrl: 'https://via.placeholder.com/150/FAD7A0/000000?text=Monitor+Fig', 
-            description: 'A fun figure to remind you to check your dashboards.'
+            imageUrl: 'https://images.unsplash.com/photo-1587825590916-2d6a5d4d3f3f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+            description: 'A fun desk figure to remind you to check your dashboards. Limited edition.'
+        },
+        {
+            id: 7,
+            name: 'Git Cheat Sheet Poster',
+            price: 12.00,
+            tags: ['accessory', 'devops', 'learning', 'tool'],
+            imageUrl: 'https://images.unsplash.com/photo-1607798733276-8805f87b8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+            description: 'Large format poster with essential Git commands for quick reference.'
+        },
+        {
+            id: 8,
+            name: 'Docker Whale Plushie',
+            price: 20.00,
+            tags: ['collectible', 'devops', 'fun'],
+            imageUrl: 'https://images.unsplash.com/photo-1627917220261-229f3d511f5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+            description: 'Cuddly Docker whale plushie. Perfect for your desk.'
         }
     ];
 
-    // Get filter and search parameters from the request
     const filterTag = req.query.tag ? req.query.tag.toLowerCase() : null;
     const searchTerm = req.query.search ? req.query.search.toLowerCase() : null;
 
     let filteredProducts = allProducts;
     let message = "Successfully retrieved E-commerce products!";
 
-    // --- LOGIC 1: Apply Filtering by Tag ---
     if (filterTag) {
         filteredProducts = filteredProducts.filter(product => 
             product.tags.includes(filterTag)
@@ -68,21 +81,17 @@ module.exports = (req, res) => {
         message = `Products filtered by tag: ${filterTag}`;
     }
 
-    // --- LOGIC 2: Apply Search by Name (after filtering, if any) ---
     if (searchTerm) {
         filteredProducts = filteredProducts.filter(product =>
-            // Check if the product name includes the search term
-            product.name.toLowerCase().includes(searchTerm)
+            product.name.toLowerCase().includes(searchTerm) ||
+            product.description.toLowerCase().includes(searchTerm) // Search by description too!
         );
-        // The message reflects both filters if needed, but we simplify it here
         message = `Products matching search term: "${searchTerm}"`;
     }
     
-    // If both are applied, we combine the messages
     if (filterTag && searchTerm) {
         message = `Products matching tag "${filterTag}" and search "${searchTerm}"`;
     }
-
 
     return res.status(200).json({
         message: message,
