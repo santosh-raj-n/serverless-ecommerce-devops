@@ -1,13 +1,14 @@
-// --- api/products.js: Final Enhanced Backend Code with Real Images ---
+// --- api/products.js: FINAL CORRECTED CODE ---
 
 module.exports = (req, res) => {
+    // Corrected product list with accurate file extensions (.jpg or .png)
     const allProducts = [
         {
             id: 1,
             name: 'DevOps T-Shirt',
             price: 25.00,
             tags: ['clothing', 'devops', 'merch'],
-            imageUrl: 'https://images.unsplash.com/photo-1622435552308-412bf5b15b49?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+            imageUrl: '/images/devops-tee.jpg', // <-- CORRECTED: .jpg
             description: 'Comfortable cotton T-shirt for the dedicated DevOps engineer. Show your passion for automation.'
         },
         {
@@ -15,7 +16,7 @@ module.exports = (req, res) => {
             name: 'Terraform Mug',
             price: 15.00,
             tags: ['accessory', 'iac', 'tool'],
-            imageUrl: 'https://images.unsplash.com/photo-1579298245158-37dfde15571f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+            imageUrl: '/images/terraform-mug.jpg', // <-- CORRECTED: .jpg
             description: 'Start your day with some Infrastructure as Code motivation. Perfect for coffee or tea.'
         },
         {
@@ -23,7 +24,7 @@ module.exports = (req, res) => {
             name: 'Serverless Sticker Pack',
             price: 10.00,
             tags: ['accessory', 'devops', 'sticker'],
-            imageUrl: 'https://images.unsplash.com/photo-1611224885913-911e860ca8c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+            imageUrl: '/images/serverless-stickers.png', // <-- CORRECTED: .png
             description: 'Pack of 10 high-quality vinyl stickers for your laptop, water bottle, or server rack.'
         },
         {
@@ -31,7 +32,7 @@ module.exports = (req, res) => {
             name: 'Cloud Computing Hoodie',
             price: 45.00,
             tags: ['clothing', 'cloud', 'warm'],
-            imageUrl: 'https://images.unsplash.com/photo-1620799140408-edc6dcd7dce1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+            imageUrl: '/images/cloud-hoodie.jpg', // <-- CORRECTED: .jpg
             description: 'Stay warm while deploying to the cloud. Unisex design.'
         },
         {
@@ -39,56 +40,43 @@ module.exports = (req, res) => {
             name: 'Kubernetes Guidebook',
             price: 35.00,
             tags: ['book', 'kubernetes', 'devops', 'tool'],
-            imageUrl: 'https://images.unsplash.com/photo-1549672049-74d7df63013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+            imageUrl: '/images/kubernetes-book.png', // <-- CORRECTED: .png
             description: 'The definitive guide to container orchestration. From beginner to advanced.'
         },
         {
             id: 6,
-            name: 'Monitor Lizard Figure',
-            price: 50.00,
-            tags: ['collectible', 'monitoring', 'fun'],
-            imageUrl: 'https://images.unsplash.com/photo-1587825590916-2d6a5d4d3f3f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-            description: 'A fun desk figure to remind you to check your dashboards. Limited edition.'
-        },
-        {
-            id: 7,
-            name: 'Git Cheat Sheet Poster',
-            price: 12.00,
-            tags: ['accessory', 'devops', 'learning', 'tool'],
-            imageUrl: 'https://images.unsplash.com/photo-1607798733276-8805f87b8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-            description: 'Large format poster with essential Git commands for quick reference.'
-        },
-        {
-            id: 8,
             name: 'Docker Whale Plushie',
-            price: 20.00,
-            tags: ['collectible', 'devops', 'fun'],
-            imageUrl: 'https://images.unsplash.com/photo-1627917220261-229f3d511f5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-            description: 'Cuddly Docker whale plushie. Perfect for your desk.'
+            price: 20.00, 
+            tags: ['collectible', 'docker', 'fun', 'devops'],
+            imageUrl: '/images/docker-plushie.jpg', // <-- CORRECTED: .jpg (or use .png if you changed it)
+            description: 'Cuddly Docker whale plushie. Perfect mascot for your continuous delivery pipeline.'
         }
     ];
 
+    // Get filter and search parameters from the request
     const filterTag = req.query.tag ? req.query.tag.toLowerCase() : null;
     const searchTerm = req.query.search ? req.query.search.toLowerCase() : null;
 
     let filteredProducts = allProducts;
     let message = "Successfully retrieved E-commerce products!";
 
+    // --- Filtering Logic ---
     if (filterTag) {
-        filteredProducts = filteredProducts.filter(product => 
+        filteredProducts = filteredProducts.filter(product =>
             product.tags.includes(filterTag)
         );
         message = `Products filtered by tag: ${filterTag}`;
     }
 
+    // --- Searching Logic (Name or Description) ---
     if (searchTerm) {
         filteredProducts = filteredProducts.filter(product =>
             product.name.toLowerCase().includes(searchTerm) ||
-            product.description.toLowerCase().includes(searchTerm) // Search by description too!
+            product.description.toLowerCase().includes(searchTerm)
         );
         message = `Products matching search term: "${searchTerm}"`;
     }
-    
+
     if (filterTag && searchTerm) {
         message = `Products matching tag "${filterTag}" and search "${searchTerm}"`;
     }
